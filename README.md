@@ -43,6 +43,7 @@ pip install flask requests
 ### Step 4: Set Up Your Google Maps API Key
 1. Open templates/map.html
 2. Change line 9 to the below where YOUR_GOOGLE_MAPS_API_KEY is your given API key:
+```html
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
 
 ---
