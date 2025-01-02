@@ -10,8 +10,10 @@ app = Flask(__name__)
 # Handles the the request, processing of the geolocation, and returning of the result
 def home():
     # Retrieves the client's IP address from the incoming request 
-    ip_address = request.remote_addr
-
+    # Gets the tester IP from the query parameter, if provided
+    test_ip = request.args.get('ip')
+    ip_address = test_ip if test_ip else request.remote_addr
+    
     # For local testing (since `127.0.0.1` is localhost), creates a mock IP:
     if ip_address == "127.0.0.1":
         ip_address = "8.8.8.8"  # Example IP for testing
@@ -32,9 +34,6 @@ def home():
     # Retrieves the 'city' field from geo_data and defaults to 'Uknown' if not available 
     city = geo_data.get("city", "Unknown")
 
-    # Constructs and returns a string with the longitude and latitude 
-    return f"City: {city}; Location: Latitude={latitude}, Longitude={longitude}" # F-string formatting (allows for string to be created with variable data at runtime) 
-
     # Passes data to the map.html template
-    # return render_template('map.html', latitude=latitude, longitude=longitude, city=city)
+    return render_template('map.html', latitude=latitude, longitude=longitude, city=city)
 

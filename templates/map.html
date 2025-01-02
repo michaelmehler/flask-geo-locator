@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GeoLocator Map</title>
+    <!-- Link to the Google Maps JavaScript API -->
+    <!-- Restricted to work only on websites with the referrer "http://127.0.0.1:5000/*"
+      ensuring the API key can only be used in this local development environment -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9S9VsULLJ83dE_xXWb03ipxuyYMuit6Y"></script> 
+    <script>
+        // Initializes the google map
+        function initMap() {
+            // Creates location object with the longitude and latitude (passed in from app.py) for the map's center 
+            var location = {lat: parseFloat('{{ latitude }}'), lng: parseFloat('{{ longitude }}')};
+
+            // Creates a Google Maps object assigning it and center it on the location
+            // The Map() constructor creates the google map object with the specified zoom and location, rendering it in the 
+            // div block with the id 'map' which was found by the getElementById method  
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10, // Sets the zoom level 
+                center: location // Centers the google map on the specified location from the location variable
+            });
+
+            // Creates and adds a marker on the location
+            // Marker method creates a marker with the position set at the location variable and placed in the map created above
+            new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+</head>
+<!-- Automatically calls initMap method when page loads -->
+<body onload="initMap()">
+    <h1>Geolocation Result</h1>
+    <p>City: {{ city }}</p>
+    <p>Latitude: {{ latitude }}</p>
+    <p>Longitude: {{ longitude }}</p>
+    <div id="map" style="width: 100%; height: 500px;"></div>
+</body>
+</html>
