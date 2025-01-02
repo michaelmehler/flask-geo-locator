@@ -14,9 +14,6 @@ This Flask web application extracts the client's IP address, performs geolocatio
 
 ## Prerequisites
 - Python 3.8 or higher
-- Flask framework
-- requests library
-- A Google Maps API key from Google Cloud Console.
 
 ---
 
@@ -41,12 +38,24 @@ pip install flask requests
 ```
 
 ### Step 4: Set Up Your Google Maps API Key
-1. Open templates/map.html
-2. Change line 9 to the below where YOUR_GOOGLE_MAPS_API_KEY is your given API key:
-```html
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
-```
 
+To use the Google Maps JavaScript API, you need to generate an API key. Follow these steps:
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create or select an existing project.
+3. Navigate to **APIs & Services** > **Credentials**.
+4. Click **+ CREATE CREDENTIALS** > **API key**.
+5. Restrict your API key to improve security:
+   - **Application Restrictions**: Set to `HTTP referrers (websites)` and add:
+     ```
+     http://127.0.0.1:5000/*
+     ```
+6. Copy your API key.
+7. Open `templates/map.html` and replace `YOUR_GOOGLE_MAPS_API_KEY` with your actual API key:
+   ```html
+   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+   ```
+   
 ---
 
 ## Usage 
